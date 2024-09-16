@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gagliardetto/solana-go"
-	"github.com/gagliardetto/solana-go/rpc"
+	"github.com/dlocmelis/solana-go"
+	"github.com/dlocmelis/solana-go/rpc"
 )
 
 type SignatureResult struct {

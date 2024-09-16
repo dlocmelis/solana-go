@@ -21,7 +21,7 @@ import (
 	"encoding/base64"
 	"fmt"
 
-	"github.com/gagliardetto/solana-go"
+	"github.com/dlocmelis/solana-go"
 )
 
 type SimulateTransactionResponse struct {

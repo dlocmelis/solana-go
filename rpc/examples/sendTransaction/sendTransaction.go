@@ -19,9 +19,9 @@ import (
 	"encoding/base64"
 	"fmt"
 
+	"github.com/dlocmelis/solana-go"
+	"github.com/dlocmelis/solana-go/rpc"
 	bin "github.com/gagliardetto/binary"
-	"github.com/gagliardetto/solana-go"
-	"github.com/gagliardetto/solana-go/rpc"
 )
 
 func main() {
