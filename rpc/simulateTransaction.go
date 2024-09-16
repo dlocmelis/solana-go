@@ -128,6 +128,9 @@ func (cl *Client) SimulateRawTransactionWithOpts(
 				"addresses": opts.Accounts.Addresses,
 			}
 		}
+		if opts.InnerInstructions {
+			obj["innerInstructions"] = opts.InnerInstructions
+		}
 	}
 
 	b64Data := base64.StdEncoding.EncodeToString(txData)
