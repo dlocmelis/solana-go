@@ -44,7 +44,7 @@ type SimulateTransactionResult struct {
 	// The number of compute budget units consumed during the processing of this transaction.
 	UnitsConsumed *uint64 `json:"unitsConsumed,omitempty"`
 
-	InnerInstructions []*InnerInstruction `json:"innerInstructions,omitempty"`
+	InnerInstructions []*ParsedInnerInstruction `json:"innerInstructions,omitempty"`
 }
 
 // SimulateTransaction simulates sending a transaction.
