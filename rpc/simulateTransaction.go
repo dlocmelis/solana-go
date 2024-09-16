@@ -43,6 +43,8 @@ type SimulateTransactionResult struct {
 
 	// The number of compute budget units consumed during the processing of this transaction.
 	UnitsConsumed *uint64 `json:"unitsConsumed,omitempty"`
+
+	InnerInstructions []*InnerInstruction `json:"innerInstructions,omitempty"`
 }
 
 // SimulateTransaction simulates sending a transaction.
@@ -65,6 +67,8 @@ type SimulateTransactionOpts struct {
 	// Commitment level to simulate the transaction at.
 	// (default: "finalized").
 	Commitment CommitmentType
+
+	InnerInstructions bool
 
 	// If true the transaction recent blockhash will be replaced with the most recent blockhash.
 	// (default: false, conflicts with SigVerify)
