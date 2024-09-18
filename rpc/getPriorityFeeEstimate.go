@@ -73,6 +73,7 @@ type GetPriorityFeeEstimateResult struct {
 	PriorityFeeEstimate float64                       `json:"priorityFeeEstimate"`
 }
 
+// PriorityLevel is the priority level of the fee.
 type MicroLamportPriorityFeeLevels struct {
 	Min       float64 `json:"min"`
 	Low       float64 `json:"low"`
