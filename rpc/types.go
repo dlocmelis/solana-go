@@ -444,6 +444,19 @@ const (
 	CommitmentProcessed CommitmentType = "processed"
 )
 
+type PriorityLevel string
+
+const (
+	PriorityLevelMin       PriorityLevel = "Min"       //0th percentile
+	PriorityLevelLow       PriorityLevel = "Low"       //25th percentile
+	PriorityLevelMedium    PriorityLevel = "Medium"    //50th percentile
+	PriorityLevelHigh      PriorityLevel = "High"      //75th percentile
+	PriorityLevelVeryHigh  PriorityLevel = "VeryHigh"  //95th percentile
+	PriorityLevelUnsafeMax PriorityLevel = "UnsafeMax" //100th percentile
+
+	Default = PriorityLevelMedium // Default is 50th percentile
+)
+
 type ParsedTransaction struct {
 	Signatures []solana.Signature `json:"signatures"`
 	Message    ParsedMessage      `json:"message"`
