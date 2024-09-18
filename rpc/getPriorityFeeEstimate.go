@@ -16,14 +16,12 @@ package rpc
 
 import (
 	"context"
-
-	"github.com/dlocmelis/solana-go"
 )
 
 // GetTokenAccountBalance returns the token balance of an SPL Token account.
 func (cl *Client) GetPriorityFeeEstimate(
 	ctx context.Context,
-	accounts []solana.PublicKey,
+	accounts []string,
 	transactionData string, // Base-64 encoded Transaction or other encoded data specified by the transactionEncoding parameter.
 	opts *GetPriorityFeeEstimateOpts,
 ) (out *GetPriorityFeeEstimateResult, err error) {
@@ -50,6 +48,7 @@ func (cl *Client) GetPriorityFeeEstimate(
 	if len(optionsObj) > 0 {
 		obj["options"] = optionsObj
 	}
+	params = append(params, obj)
 	err = cl.rpcClient.CallForInto(ctx, &out, "getPriorityFeeEstimate", params)
 	return
 }
