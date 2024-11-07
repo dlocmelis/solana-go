@@ -62,7 +62,7 @@ func (cl *Client) TransactionSyndicaSubscribe(params *TransactionSyndicaParams) 
 		"chainstream.transactionsSubscribe",
 		"chainstream.transactionsUnsubscribe",
 		func(msg []byte) (interface{}, error) {
-			var res TransactionResult
+			var res TransactionSyndicaResult
 			err := decodeResponseFromMessage(msg, &res)
 			return &res, err
 		},
