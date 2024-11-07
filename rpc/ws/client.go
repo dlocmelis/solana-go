@@ -339,6 +339,43 @@ func (c *Client) subscribe(
 	return sub, nil
 }
 
+func (c *Client) subscribeSyndica(
+	params interface{},
+	subscriptionMethod string,
+	unsubscribeMethod string,
+	decoderFunc decoderFunc,
+) (*Subscription, error) {
+	c.lock.Lock()
+	defer c.lock.Unlock()
+
+	req := newRequestSyndica(params, subscriptionMethod)
+	data, err := req.encode()
+	if err != nil {
+		return nil, fmt.Errorf("subscribe: unable to encode subsciption request: %w", err)
+	}
+
+	sub := newSubscription(
+		req,
+		func(err error) {
+			c.closeSubscription(req.ID, err)
+		},
+		unsubscribeMethod,
+		decoderFunc,
+	)
+
+	c.subscriptionByRequestID[req.ID] = sub
+	zlog.Info("added new subscription to websocket client", zap.Int("count", len(c.subscriptionByRequestID)))
+
+	zlog.Debug("writing data to conn", zap.String("data", string(data)))
+	c.conn.SetWriteDeadline(time.Now().Add(writeWait))
+	err = c.conn.WriteMessage(websocket.TextMessage, data)
+	if err != nil {
+		return nil, fmt.Errorf("unable to write request: %w", err)
+	}
+
+	return sub, nil
+}
+
 func decodeResponseFromReader(r io.Reader, reply interface{}) (err error) {
 	var c *response
 	if err := json.NewDecoder(r).Decode(&c); err != nil {

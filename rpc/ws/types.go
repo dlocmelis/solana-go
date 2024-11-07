@@ -44,6 +44,15 @@ func newRequest(params []interface{}, method string, configuration map[string]in
 	}
 }
 
+func newRequestSyndica(params interface{}, method string) *request {
+	return &request{
+		Version: "2.0",
+		Method:  method,
+		Params:  params,
+		ID:      uint64(rand.Int63()),
+	}
+}
+
 func (c *request) encode() ([]byte, error) {
 	data, err := json.Marshal(c)
 	if err != nil {
